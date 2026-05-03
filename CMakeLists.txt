@@ -1,6 +1,6 @@
 # 标题
 cmake_minimum_required(VERSION 3.10.0)
-project(SDLShooter VERSION 0.1.0 LANGUAGES C CXX)
+project(GhostEscape VERSION 0.1.0 LANGUAGES C CXX)
 
 # 设置C++标准
 set(CMAKE_CXX_STANDARD 17)
@@ -27,7 +27,10 @@ find_package(SDL3_ttf REQUIRED)
 find_package(glm REQUIRED)
 
 # 添加可执行文件
-add_executable(${TARGET} main.cpp)
+add_executable(${TARGET} 
+                        src/main.cpp
+                        src/core/game.cpp
+                        )
 
 # 链接库
 target_link_libraries(${TARGET}
