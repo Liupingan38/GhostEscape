@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include"../sceneMain.h"
+
 Game::~Game()
 {
     clean();
@@ -19,9 +21,9 @@ void Game::run()
         if(elapsedTime < frameDelay_) 
         {
             SDL_DelayNS(frameDelay_ - elapsedTime); 
-            dt_ = frameDelay_ / 1e9; // 转换为秒
+            dt_ = static_cast<float>(frameDelay_ / 1e9); // 转换为秒
         }else{
-            dt_ = elapsedTime / 1e9; // 转换为秒
+            dt_ = static_cast<float>(elapsedTime / 1e9); // 转换为秒
         }
         SDL_Log("FPS: %f", 1.0 / dt_);
     }
@@ -72,7 +74,11 @@ void Game::init(std::string title, int width, int height)
     SDL_SetRenderLogicalPresentation(renderer_, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
     // 计算游戏帧间隔
-    frameDelay_ = 1e9 / FPS_; // 转换为纳秒
+    frameDelay_ = static_cast<Uint64>(1e9 / FPS_); // 转换为纳秒
+
+    // 初始化游戏场景
+    currentScene_ = new SceneMain();
+    currentScene_->init();
 }
 
 void Game::handleEvents()
@@ -88,6 +94,8 @@ void Game::handleEvents()
             break;
         // 处理其他事件，如键盘输入、鼠标事件等
         default:
+            if(currentScene_) currentScene_->handleEvents(event);
+
             break;
         }
     }
@@ -95,16 +103,34 @@ void Game::handleEvents()
 
 void Game::update(float dt)
 {
-    
+    // 更新当前场景
+    if(currentScene_) currentScene_->update(dt);
 }
 
 void Game::render()
 {
-    
+    // 清屏
+    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
+    SDL_RenderClear(renderer_);
+
+    // 渲染当前场景
+    if(currentScene_) currentScene_->render();
+
+    // 显示渲染结果
+    SDL_RenderPresent(renderer_);
+
 }
 
 void Game::clean()
 {
+    // 清理游戏场景
+    if(currentScene_) 
+    {
+        currentScene_->clean();
+        delete currentScene_;
+        currentScene_ = nullptr;
+    }
+
     // 清理图片资源
     
 

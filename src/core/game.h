@@ -9,9 +9,14 @@
 #include <glm/glm.hpp>
 #include <string>
 
+class Scene;
+
 class Game
 {
 private:
+
+    // 游戏场景相关
+    Scene *currentScene_ = nullptr;
 
     // 游戏初始化相关
     bool isRunning_ = true;
