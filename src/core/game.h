@@ -51,4 +51,10 @@ public:
     void update(float dt);
     void render();
     void clean();
+
+    // 绘制网格
+    void drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color);
+
+    //绘制方框
+    void drawRect(const glm::vec2& left_top, const glm::vec2& right_bottom, float width,SDL_FColor color);
 };

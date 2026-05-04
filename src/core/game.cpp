@@ -149,3 +149,39 @@ void Game::clean()
     SDL_Quit();
     
 }
+
+void Game::drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color)
+{
+    SDL_SetRenderDrawColorFloat(renderer_, color.r, color.g, color.b, color.a);
+
+    //打印左上角和右下角坐标
+    SDL_Log("Drawing grid from (%f, %f) to (%f, %f)", left_top.x, left_top.y, right_bottom.x, right_bottom.y);
+
+    // 绘制竖线
+    for (float x = left_top.x; x <= right_bottom.x; x += gridWidth)
+    {
+        SDL_RenderLine(renderer_, x, left_top.y, x, right_bottom.y);
+    }
+
+    // 绘制横线
+    for (float y = left_top.y; y <= right_bottom.y; y += gridWidth)
+    {
+        SDL_RenderLine(renderer_, left_top.x, y, right_bottom.x, y);
+    }
+
+    SDL_SetRenderDrawColorFloat(renderer_, 0, 0, 0, 1); // 恢复默认颜色
+}
+
+void Game::drawRect(const glm::vec2 &left_top, const glm::vec2 &right_bottom, float width, SDL_FColor color)
+{
+    SDL_SetRenderDrawColorFloat(renderer_, color.r, color.g, color.b, color.a);
+
+    // 绘制边框
+    for (int i = 0; i < width; ++i)
+    {
+        SDL_FRect rect = {left_top.x - i, left_top.y - i, right_bottom.x - left_top.x + 2 * i, right_bottom.y - left_top.y + 2 * i};
+        SDL_RenderRect(renderer_, &rect);
+    }
+
+    SDL_SetRenderDrawColorFloat(renderer_, 0, 0, 0, 1); // 恢复默认颜色
+}
