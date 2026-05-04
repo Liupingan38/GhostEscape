@@ -57,4 +57,8 @@ public:
 
     //绘制方框
     void drawRect(const glm::vec2& left_top, const glm::vec2& right_bottom, float width,SDL_FColor color);
+
+    // getter and setter (如果只有一行，编译器会优化成inline函数)
+    Scene* getCurrentScene() const { return currentScene_; }
+    void setCurrentScene(Scene* scene) { currentScene_ = scene; }
 };

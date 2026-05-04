@@ -31,6 +31,7 @@ add_executable(${TARGET}
                         src/main.cpp
                         src/core/game.cpp
                         src/sceneMain.cpp
+                        src/core/objectWorld.cpp
                         )
 
 # 链接库

@@ -1,6 +1,6 @@
 #include "game.h"
-
 #include"../sceneMain.h"
+#include"objectScreen.h"
 
 Game::~Game()
 {
