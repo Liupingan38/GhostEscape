@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -10,10 +9,14 @@
 #include <string>
 
 class Scene;
+class AssetStore;
 
 class Game
 {
 private:
+
+    //游戏资源管理
+    AssetStore *assetStore_ = nullptr;
 
     // 游戏场景相关
     Scene *currentScene_ = nullptr;
@@ -21,15 +24,17 @@ private:
     // 游戏初始化相关
     bool isRunning_ = true;
     glm::vec2 screenSize_ = glm::vec2(1080, 720);
-    SDL_Window *window_;
-    SDL_Renderer *renderer_;
+
+    // SDL相关
+    SDL_Window *window_=nullptr;
+    SDL_Renderer *renderer_=nullptr;
+    MIX_Mixer *mixer_ = nullptr;
 
     // 游戏帧率相关
     Uint64 FPS_=120;            // 目标帧率
     Uint64 frameDelay_ = 0;    // 每帧应该花的时间（纳秒）
     float dt_ = 0.f;           // 每帧实际花的时间（秒）
 
-private:
     Game() {};
     Game(const Game &) = delete;
     Game &operator=(const Game &) = delete;
@@ -63,4 +68,7 @@ public:
     void setCurrentScene(Scene* scene) { currentScene_ = scene; }
     const glm::vec2& getScreenSize() const { return screenSize_; }
     void setScreenSize(const glm::vec2& size) { screenSize_ = size; }
+    SDL_Renderer* getRenderer() const { return renderer_; }
+    MIX_Mixer* getMixer() const { return mixer_; }
+    AssetStore* getAssetStore() const { return assetStore_; }
 };

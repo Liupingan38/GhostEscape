@@ -1,6 +1,7 @@
 #include "game.h"
 #include"../sceneMain.h"
 #include"../player.h"
+#include "assetStore.h"
 
 Game::~Game()
 {
@@ -36,7 +37,7 @@ void Game::init(std::string title, int width, int height)
     // 初始化SDL3
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
     {
-        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
+        SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
         isRunning_ = false;
         return;
     }
@@ -46,7 +47,7 @@ void Game::init(std::string title, int width, int height)
     // 初始化SDL3_mixer
     if (!MIX_Init())
     {
-        std::cerr << "Failed to initialize SDL_mixer: " << SDL_GetError() << std::endl;
+        SDL_Log("Failed to initialize SDL_mixer: %s", SDL_GetError());
         isRunning_ = false;
         return;
     }
@@ -54,7 +55,7 @@ void Game::init(std::string title, int width, int height)
     // 初始化SDL3_ttf
     if (!TTF_Init())
     {
-        std::cerr << "Failed to initialize SDL_ttf: " << SDL_GetError() << std::endl;
+        SDL_Log("Failed to initialize SDL_ttf: %s", SDL_GetError());
         isRunning_ = false;
         return;
     }
@@ -62,16 +63,33 @@ void Game::init(std::string title, int width, int height)
     // 创建窗口和渲染器
     screenSize_ = glm::vec2(width, height);
     SDL_CreateWindowAndRenderer(title.c_str(), width, height, SDL_WINDOW_RESIZABLE, &window_, &renderer_);
-
     if (!window_ || !renderer_)
     {
-        std::cerr << "Failed to create window or renderer: " << SDL_GetError() << std::endl;
+        SDL_Log("Failed to create window or renderer: %s", SDL_GetError());
         isRunning_ = false;
         return;
     }
 
     // 设置窗口逻辑分辨率
     SDL_SetRenderLogicalPresentation(renderer_, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+
+    // 创建Mixer
+    mixer_ = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
+    if (!mixer_)
+    {
+        SDL_Log("Failed to create mixer: %s", SDL_GetError());
+        isRunning_ = false;
+        return;
+    }
+
+    // 创建资源管理器(一定要在SDL和Mixer初始化之后创建，因为资源管理器需要用到它们)
+    assetStore_ = new AssetStore();
+    if (!assetStore_)
+    {
+        SDL_Log("Failed to create asset store");
+        isRunning_ = false;
+        return;
+    }
 
     // 计算游戏帧间隔
     frameDelay_ = static_cast<Uint64>(1e9 / FPS_); // 转换为纳秒
@@ -123,6 +141,14 @@ void Game::render()
 
 void Game::clean()
 {
+    // 清理资源管理器
+    if(assetStore_) 
+    {
+        assetStore_->clean();
+        delete assetStore_;
+        assetStore_ = nullptr;
+    }
+
     // 清理游戏场景
     if(currentScene_) 
     {
@@ -144,6 +170,7 @@ void Game::clean()
     TTF_Quit();
 
     // 清理并退出
+    if(mixer_) MIX_DestroyMixer(mixer_);
     if(renderer_) SDL_DestroyRenderer(renderer_);
     if(window_) SDL_DestroyWindow(window_);
     SDL_Quit();
