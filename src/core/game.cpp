@@ -1,6 +1,6 @@
 #include "game.h"
 #include"../sceneMain.h"
-#include"objectScreen.h"
+#include"../player.h"
 
 Game::~Game()
 {
@@ -25,7 +25,7 @@ void Game::run()
         }else{
             dt_ = static_cast<float>(elapsedTime / 1e9); // 转换为秒
         }
-        SDL_Log("FPS: %f", 1.0 / dt_);
+        
     }
 }
 
@@ -153,9 +153,6 @@ void Game::clean()
 void Game::drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color)
 {
     SDL_SetRenderDrawColorFloat(renderer_, color.r, color.g, color.b, color.a);
-
-    //打印左上角和右下角坐标
-    SDL_Log("Drawing grid from (%f, %f) to (%f, %f)", left_top.x, left_top.y, right_bottom.x, right_bottom.y);
 
     // 绘制竖线
     for (float x = left_top.x; x <= right_bottom.x; x += gridWidth)

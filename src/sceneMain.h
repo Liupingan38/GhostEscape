@@ -2,6 +2,8 @@
 
 #include "core/scene.h"
 
+class Player;
+
 class SceneMain : public Scene
 {
 
@@ -15,13 +17,20 @@ public:
     virtual void render() override;
     virtual void clean() override;
 
+    //getter and setter
+    
+
+
 private:
     // 背景网格参数
-    glm::vec2 wordSize_=glm::vec2(3000.f, 3000.f);
+
     float gridWidth_ = 100.f;
     float borderWidth_ = 10.f;
     SDL_FColor gridColor_ = {0.5f, 0.5f, 0.5f, 1.f};
 
     void renderBackground();
+
+    //玩家
+    Player* player_ = nullptr;
 };
 

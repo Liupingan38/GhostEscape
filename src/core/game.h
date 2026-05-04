@@ -61,4 +61,6 @@ public:
     // getter and setter (如果只有一行，编译器会优化成inline函数)
     Scene* getCurrentScene() const { return currentScene_; }
     void setCurrentScene(Scene* scene) { currentScene_ = scene; }
+    const glm::vec2& getScreenSize() const { return screenSize_; }
+    void setScreenSize(const glm::vec2& size) { screenSize_ = size; }
 };

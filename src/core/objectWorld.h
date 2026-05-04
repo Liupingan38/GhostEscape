@@ -7,6 +7,9 @@ class ObjectWorld : public ObjectScreen
 protected:
     glm::vec2 position_ = glm::vec2(0.f, 0.f);
 public:
+    ObjectWorld() = default;
+    virtual ~ObjectWorld() = default;
+    
     virtual void update(float dt) override;
 
     // getter and setter
