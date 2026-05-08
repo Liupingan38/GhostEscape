@@ -1,6 +1,7 @@
 #pragma once
 
 #include "object.h"
+#include "objectWorld.h"
 #include<glm/glm.hpp>
 #include<vector>
 
@@ -12,7 +13,10 @@ private:
 protected:
     glm::vec2 wordSize_=glm::vec2(3000.f, 2000.f);
     glm::vec2 cameraPosition_ = glm::vec2(0.f, 0.f);
-    std::vector<Object*> sceneObjects_;
+
+    std::vector<ObjectScreen*> screenChildren_; // 屏幕对象列表
+    std::vector<ObjectWorld*> worldChildren_; // 世界对象列表
+    
 
 public:
     Scene() = default;
@@ -23,6 +27,9 @@ public:
     virtual void update(float dt) override {}
     virtual void render() override {}
     virtual void clean() override {}
+
+    virtual void addChild(Object* child) override;
+    virtual void removeChild(Object* child) override;
 
     // getter and setter
     const glm::vec2& getCameraPosition() const { return cameraPosition_; }

@@ -1,5 +1,13 @@
 #include "scene.h"
 
+void Scene::addChild(Object *child)
+{
+}
+
+void Scene::removeChild(Object *child)
+{
+}
+
 void Scene::setCameraPosition(const glm::vec2 &pos)
 {
     cameraPosition_ = pos;

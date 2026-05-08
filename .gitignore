@@ -1,0 +1,81 @@
+# ==============================================
+# 基础项目配置
+# ==============================================
+
+/credits.txt
+/main1.cpp
+
+# ==============================================
+# CMake / 构建系统
+# ==============================================
+/build/
+/cmake-build-*/
+/out/
+/bin/
+/obj/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+Makefile
+*.cmake
+*.mk
+
+# ==============================================
+# Visual Studio / Rider / CLion 相关
+# ==============================================
+/.vs/
+/.vscode/
+/.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+*.vcxproj.filters
+*.vcxproj
+
+# 编译产物
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.obj
+*.iobj
+*.ipdb
+*.tlog
+*.log
+*.lastbuildstate
+*.aps
+*.res
+*.pch
+*.idb
+*.bsc
+
+# ==============================================
+# 游戏资源（根据需要调整）
+# ==============================================
+# 如果你想提交 assets，删除下面这几行
+# /assets/bgm/
+# /assets/effect/
+# /assets/font/
+# /assets/sound/
+# /assets/sprite/
+# /assets/UI/
+
+# 如果你只想忽略临时资源文件，保留基础结构
+# /assets/**/*.tmp
+# /assets/**/*.bak
+
+# ==============================================
+# 其他临时文件
+# ==============================================
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
