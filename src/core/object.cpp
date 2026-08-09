@@ -1,13 +1,5 @@
 #include "object.h"
 
-void Object::init()
-{
-    for (auto& child : children_)
-    {
-        child->init();
-    }
-}
-
 void Object::handleEvents(SDL_Event &event)
 {
     for (auto& child : children_)

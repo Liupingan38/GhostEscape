@@ -3,37 +3,42 @@
 
 void SceneMain::init()
 {
+    Scene::init(); // 调用父类的初始化方法
+
     setCameraPosition((getWorldSize()-game_.getScreenSize())/2.f); // 初始化摄像机位置
 
     // 创建玩家对象并添加到场景中
     player_ = new Player();
+    player_->init();
     player_->setPosition(getWorldSize()/2.f); // 玩家初始位置在世界中心
+    worldChildren_.push_back(player_); // 将玩家对象添加到世界对象列表中
 }
 
 void SceneMain::handleEvents(SDL_Event &event)
 {
+    Scene::handleEvents(event); // 调用父类的事件处理方法
 }
 
 void SceneMain::update(float dt)
 {
+    Scene::update(dt); // 调用父类的更新方法
+
     //cameraPos_ += glm::vec2(200.f, 300.f) * dt; // 模拟摄像机向右移动
-    player_->update(dt); // 更新玩家对象
+    
 }
 
 void SceneMain::render()
 {
+    Scene::render(); // 调用父类的渲染方法
+
     renderBackground();
-    player_->render(); // 渲染玩家对象
+    
 }
 
 void SceneMain::clean()
 {
-    if(player_) 
-    {
-        player_->clean();
-        delete player_;
-        player_ = nullptr;
-    }
+    Scene::clean(); // 调用父类的清理方法
+
 }
 
 void SceneMain::renderBackground()

@@ -3,14 +3,18 @@
 
 void Player::init()
 {
+    Actor::init(); // 调用父类的初始化方法
 }
 
 void Player::handleEvents(SDL_Event &event)
 {
+    Actor::handleEvents(event); // 调用父类的事件处理方法
 }
 
 void Player::update(float dt)
 {
+    Actor::update(dt); // 调用父类的更新方法
+
     keyboardControl();
     move(dt);
     followCamera();
@@ -18,11 +22,14 @@ void Player::update(float dt)
 
 void Player::render()
 {
+    Actor::render(); // 调用父类的渲染方法
+
     game_.drawRect(screenPosition_, screenPosition_ + glm::vec2(50.f, 50.f), 5.f, SDL_FColor{1.f, 0.f, 0.f, 1.f});
 }
 
 void Player::clean()
 {
+    Actor::clean(); // 调用父类的清理方法
 }
 
 void Player::keyboardControl()

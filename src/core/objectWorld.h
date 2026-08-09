@@ -10,6 +10,7 @@ public:
     ObjectWorld() = default;
     virtual ~ObjectWorld() = default;
     
+    virtual void init() override {type_ = ObjectType::OBJECT_WORLD;}
     virtual void update(float dt) override;
 
     // getter and setter

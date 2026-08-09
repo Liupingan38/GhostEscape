@@ -11,6 +11,8 @@ public:
     ObjectScreen() = default;
     virtual ~ObjectScreen() = default;
 
+    virtual void init() override {type_ = ObjectType::OBJECT_SCREEN;}
+
     // getter and setter
     const glm::vec2& getScreenPosition() const { return screenPosition_; }
     virtual void setScreenPosition(const glm::vec2& pos) { screenPosition_ = pos; }

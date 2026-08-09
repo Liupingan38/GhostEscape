@@ -23,7 +23,7 @@ private:
     void loadFont(const std::string &filePath, int fontSize);
 
 public:
-    AssetStore()=default;
+    AssetStore() = default;
     ~AssetStore() = default;
 
     void clean();
