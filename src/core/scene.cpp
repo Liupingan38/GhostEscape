@@ -5,10 +5,12 @@ void Scene::handleEvents(SDL_Event &event)
     Object::handleEvents(event); // 调用父类的事件处理方法
     for (auto child : screenChildren_)
     {
+        if (!child->isActive()) continue;
         child->handleEvents(event);
     }
     for (auto child : worldChildren_)
     {
+        if (!child->isActive()) continue;
         child->handleEvents(event);
     }
 }
@@ -18,10 +20,12 @@ void Scene::update(float dt)
     Object::update(dt); // 调用父类的更新方法
     for (auto child : worldChildren_)
     {
+        if (!child->isActive()) continue;
         child->update(dt);
     }
     for (auto child : screenChildren_)
     {
+        if (!child->isActive()) continue;
         child->update(dt);
     }
     
@@ -32,10 +36,12 @@ void Scene::render()
     Object::render(); // 调用父类的渲染方法
     for (auto child : worldChildren_)
     {
+        if (!child->isActive()) continue;
         child->render();
     }
     for (auto child : screenChildren_)
     {
+        if (!child->isActive()) continue;
         child->render();
     }
 }

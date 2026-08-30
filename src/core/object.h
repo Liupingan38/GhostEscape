@@ -11,7 +11,7 @@ protected:
     Game& game_ = Game::getInstance();
     std::vector<Object*> children_; // 子对象列表
     ObjectType type_ = ObjectType::OBJECT_NONE; // 对象类型
-
+    bool is_active_ = true; // 对象是否激活
 public:
     Object() = default;
     virtual ~Object() = default;
@@ -25,6 +25,8 @@ public:
     // getter and setter
     ObjectType getType() const { return type_; }
     void setType(ObjectType type) { type_ = type; }
+    bool isActive() const { return is_active_; }
+    void setActive(bool active) { is_active_ = active; }
 
     virtual void addChild(Object* child) { children_.push_back(child); }
     virtual void removeChild(Object* child) {

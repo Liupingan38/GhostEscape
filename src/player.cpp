@@ -5,7 +5,9 @@
 void Player::init()
 {
     Actor::init(); // 调用父类的初始化方法
-    SpriteAnim* spriteAnim = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.5f, true);
+    sprite_idle_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.5f, true);
+    sprite_move_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-move.png", 2.5f, true);
+    sprite_move_->setActive(false); 
 }
 
 void Player::handleEvents(SDL_Event &event)
@@ -18,6 +20,7 @@ void Player::update(float dt)
     Actor::update(dt); // 调用父类的更新方法
 
     keyboardControl();
+    checkState();
     move(dt);
     followCamera();
 }
@@ -66,4 +69,37 @@ void Player::followCamera()
 {
     game_.getCurrentScene()->setCameraPosition(position_ - game_.getScreenSize() / 2.f);
 
+}
+
+void Player::checkState()
+{
+    bool isFlip = velocity_.x < 0.f; // 根据水平速度判断是否翻转
+    sprite_idle_->setFlip(isFlip);
+    sprite_move_->setFlip(isFlip);
+
+    bool isMovingNow = glm::length(velocity_) > 0.1f; // 判断是否在移动
+    
+    if(isMovingNow != is_moving_)
+    {
+        is_moving_ = isMovingNow;
+        changeState(is_moving_);
+    }
+}
+
+void Player::changeState(bool isMoving)
+{
+    if(isMoving)
+    {
+        // move 
+        sprite_idle_->setActive(false);
+        sprite_move_->setActive(true);
+        sprite_move_->setCurFrame(sprite_idle_->getCurFrame()); // 保持动画帧同步
+        sprite_move_->setTimeCounter(sprite_idle_->getTimeCounter()); // 保持动画时间计数器同步
+    }else{
+        // idle
+        sprite_idle_->setActive(true);
+        sprite_move_->setActive(false);
+        sprite_idle_->setCurFrame(sprite_move_->getCurFrame());
+        sprite_idle_->setTimeCounter(sprite_move_->getTimeCounter());
+    }
 }

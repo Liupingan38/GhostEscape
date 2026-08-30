@@ -15,4 +15,14 @@ public:
 
     void update(float dt);
     virtual void setTexture(Texture texture) override;
+
+    // getter and setter
+    int getCurFrame() const { return cur_frame_; }
+    void setCurFrame(int frame) { cur_frame_ = frame % total_frame_; }
+    int getTotalFrame() const { return total_frame_; }
+    void setTotalFrame(int frame) { total_frame_ = frame; }
+    int getFPS() const { return FPS; }
+    void setFPS(int fps) { FPS = fps; }
+    float getTimeCounter() const { return time_counter_; }
+    void setTimeCounter(float time) { time_counter_ = time; }
 };

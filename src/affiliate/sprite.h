@@ -27,6 +27,10 @@ public:
     // getter and setter
     Texture getTexture() const { return texture_; }
     virtual void setTexture(Texture texture) ;
+    float getAngle() const { return texture_.angle; }
+    void setAngle(float angle) { texture_.angle = angle; }
+    bool isFlip() const { return texture_.is_flip; }
+    void setFlip(bool flip) { texture_.is_flip = flip; }
 
     virtual void render() override;
 };
