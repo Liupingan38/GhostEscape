@@ -10,6 +10,7 @@
 
 class Scene;
 class AssetStore;
+struct Texture;
 
 class Game
 {
@@ -57,6 +58,9 @@ public:
     void render();
     void clean();
 
+    // 渲染Texture
+    void renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size);
+    
     // 绘制网格
     void drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color);
 

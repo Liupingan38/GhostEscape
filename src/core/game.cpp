@@ -2,6 +2,7 @@
 #include"../sceneMain.h"
 #include"../player.h"
 #include "assetStore.h"
+#include "../affiliate/sprite.h"
 
 Game::~Game()
 {
@@ -175,6 +176,18 @@ void Game::clean()
     if(window_) SDL_DestroyWindow(window_);
     SDL_Quit();
     
+}
+
+void Game::renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size)
+{
+    if (!texture.texture)
+    {
+        SDL_Log("Game::renderTexture: texture is null");
+        return;
+    }
+
+    SDL_FRect dest_rect = {position.x, position.y, size.x, size.y};
+    SDL_RenderTextureRotated(renderer_, texture.texture, &texture.src_rect, &dest_rect, texture.angle, nullptr, texture.is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void Game::drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color)
