@@ -38,6 +38,7 @@ add_executable(${TARGET}
                         src/core/assetStore.cpp
                         src/core/objectAffiliate.cpp
                         src/affiliate/sprite.cpp
+                        src/affiliate/spriteAnim.cpp
                         )
 
 # 链接库

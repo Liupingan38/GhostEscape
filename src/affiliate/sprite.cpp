@@ -8,6 +8,18 @@ Texture::Texture(const std::string &file_path)
     SDL_GetTextureSize(texture, &src_rect.w, &src_rect.h);
 }
 
+Sprite *Sprite::addSpriteChild(ObjectScreen *parent, const std::string &file_path, float scale, bool bCentered)
+{
+    auto sprite = new Sprite();
+    sprite->init();
+    sprite->setParent(parent);
+    sprite->setTexture(Texture(file_path));
+    sprite->setScale(scale);
+    sprite->setOffset(bCentered ? glm::vec2(-sprite->getSize().x / 2.f, -sprite->getSize().y / 2.f) : glm::vec2(0.f, 0.f));
+    parent->addChild(sprite);
+    return sprite;
+}
+
 void Sprite::setTexture(Texture texture)
 {
     texture_ = texture;

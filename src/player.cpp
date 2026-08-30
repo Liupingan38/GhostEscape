@@ -1,15 +1,11 @@
 #include "player.h"
 #include "core/scene.h"
-#include "affiliate/sprite.h"
+#include "affiliate/spriteAnim.h"
 
 void Player::init()
 {
     Actor::init(); // 调用父类的初始化方法
-    auto sprite = new Sprite();
-    sprite->setTexture(Texture("assets/sprite/ghost-idle.png"));
-    sprite->setParent(this);
-    sprite->setOffset(glm::vec2(-sprite->getSize().x / 2.f, -sprite->getSize().y / 2.f)); // 将精灵的中心对齐到玩家位置
-    addChild(sprite);
+    SpriteAnim* spriteAnim = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.5f, true);
 }
 
 void Player::handleEvents(SDL_Event &event)
@@ -30,7 +26,7 @@ void Player::render()
 {
     Actor::render(); // 调用父类的渲染方法
 
-    game_.drawRect(screenPosition_, screenPosition_ + glm::vec2(50.f, 50.f), 5.f, SDL_FColor{1.f, 0.f, 0.f, 1.f});
+    //game_.drawRect(screenPosition_, screenPosition_ + glm::vec2(50.f, 50.f), 5.f, SDL_FColor{1.f, 0.f, 0.f, 1.f});
 }
 
 void Player::clean()

@@ -29,9 +29,8 @@ void SceneMain::update(float dt)
 
 void SceneMain::render()
 {
-    Scene::render(); // 调用父类的渲染方法
-
     renderBackground();
+    Scene::render(); // 调用父类的渲染方法
     
 }
 
