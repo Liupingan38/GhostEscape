@@ -9,6 +9,9 @@ private:
     int total_frame_ = 0;
     int FPS = 10; 
     float time_counter_ = 0.0f;
+
+    bool  is_loop_ = true; // 是否循环播放动画
+    
 public:
     static SpriteAnim* addSpriteAnimChild(ObjectScreen* parent, const std::string& file_path, 
         float scale=1.0f, bool bCentered = false,int fps = 10);
@@ -25,4 +28,6 @@ public:
     void setFPS(int fps) { FPS = fps; }
     float getTimeCounter() const { return time_counter_; }
     void setTimeCounter(float time) { time_counter_ = time; }
+    bool isLoop() const { return is_loop_; }
+    void setLoop(bool loop) { is_loop_ = loop; }
 };

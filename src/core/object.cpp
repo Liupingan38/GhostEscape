@@ -11,10 +11,17 @@ void Object::handleEvents(SDL_Event &event)
 
 void Object::update(float dt)
 {
-    for (auto& child : children_)
+    for (auto it = children_.begin(); it != children_.end(); )
     {
-        if (!child->isActive()) continue;
-        child->update(dt);
+        auto child = *it;
+        if(child->isPendingKill()){
+            child->clean();
+            delete child;
+            it = children_.erase(it);
+        }else{
+            if (child->isActive()) child->update(dt);
+            ++it;
+        }
     }
 }
 

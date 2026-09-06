@@ -19,16 +19,9 @@ public:
     virtual void render() override;
     virtual void clean() override;
 
-    // 玩家控制相关
-    void keyboardControl();
-    void move(float dt);
-
-    // 相机跟随
-    void followCamera();
-
-    // 检查角色状态
-    void checkState();
-
-    // 改变角色状态
-    void changeState(bool isMoving);
+    
+    void keyboardControl(); // 玩家控制相关
+    void followCamera(); // 相机跟随
+    void checkState(); // 检查角色状态
+    void changeState(bool isMoving); // 改变角色状态
 };

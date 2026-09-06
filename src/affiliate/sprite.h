@@ -17,6 +17,7 @@ class Sprite : public ObjectAffiliate
 {
 protected:
     Texture texture_;
+    bool is_finish_ = false; // 是否播放完毕（用于动画精灵）
 
 public:
     static Sprite* addSpriteChild(ObjectScreen* parent, const std::string& file_path, 
@@ -31,6 +32,8 @@ public:
     void setAngle(float angle) { texture_.angle = angle; }
     bool isFlip() const { return texture_.is_flip; }
     void setFlip(bool flip) { texture_.is_flip = flip; }
+    bool isFinish() const { return is_finish_; }
+    void setFinish(bool finish) { is_finish_ = finish; }
 
     virtual void render() override;
 };

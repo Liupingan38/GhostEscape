@@ -12,6 +12,8 @@ public:
     Actor() = default;
     virtual ~Actor() = default;
 
+    void move(float dt);
+
     // getter and setter
     const glm::vec2& getVelocity() const { return velocity_; }
     void setVelocity(const glm::vec2& vel) { velocity_ = vel; }

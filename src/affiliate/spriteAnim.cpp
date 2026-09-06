@@ -19,10 +19,19 @@ SpriteAnim *SpriteAnim::addSpriteAnimChild(ObjectScreen *parent, const std::stri
 
 void SpriteAnim::update(float dt)
 {
+    if (is_finish_) return;
     time_counter_ += dt;
     if (time_counter_ >= 1.0f / FPS)
     {
         cur_frame_ = (cur_frame_ + 1) % total_frame_;
+        if (cur_frame_ == 0)
+        {
+            if (!is_loop_)
+            {
+                is_finish_ = true;
+                return;
+            }
+        }
         time_counter_ = 0.0f;
     }
     texture_.src_rect.x = static_cast<float>(cur_frame_) * texture_.src_rect.h;

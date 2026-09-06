@@ -28,15 +28,7 @@ void Sprite::setTexture(Texture texture)
 
 void Sprite::render()
 {
-    if (!texture_.texture)
-    {
-        SDL_Log("Sprite::render: texture is null");
-        return;
-    }
-    if(!parent_)
-    {
-        SDL_Log("Sprite::render: parent is null");
-        return;
-    }
+    if (!texture_.texture || !parent_ || is_finish_) return;
+    
     Game::getInstance().renderTexture(texture_, parent_->getScreenPosition() + offset_, size_);
 }

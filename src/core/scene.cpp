@@ -18,17 +18,30 @@ void Scene::handleEvents(SDL_Event &event)
 void Scene::update(float dt)
 {
     Object::update(dt); // 调用父类的更新方法
-    for (auto child : worldChildren_)
+    for (auto it = worldChildren_.begin(); it != worldChildren_.end(); )
     {
-        if (!child->isActive()) continue;
-        child->update(dt);
+        auto child = *it;
+        if(child->isPendingKill()){
+            child->clean();
+            delete child;
+            it = worldChildren_.erase(it);
+        }else{
+            if (child->isActive()) child->update(dt);
+            ++it;
+        }
     }
-    for (auto child : screenChildren_)
+    for (auto it = screenChildren_.begin(); it != screenChildren_.end(); )
     {
-        if (!child->isActive()) continue;
-        child->update(dt);
+        auto child = *it;
+        if(child->isPendingKill()){
+            child->clean();
+            delete child;
+            it = screenChildren_.erase(it);
+        }else{
+            if (child->isActive()) child->update(dt);
+            ++it;
+        }
     }
-    
 }
 
 void Scene::render()

@@ -1,5 +1,6 @@
 #include "sceneMain.h"
 #include "player.h"
+#include "enemy.h"
 
 void SceneMain::init()
 {
@@ -11,7 +12,14 @@ void SceneMain::init()
     player_ = new Player();
     player_->init();
     player_->setPosition(getWorldSize()/2.f); // 玩家初始位置在世界中心
-    worldChildren_.push_back(player_); // 将玩家对象添加到世界对象列表中
+    addChild(player_); // 将玩家对象添加到场景中
+
+    // 创建玩家对象并添加到场景中
+    auto enemy_ = new Enemy();
+    enemy_->init();
+    enemy_->setPosition(getWorldSize()); // 玩家初始位置在世界中心
+    enemy_->setTarget(player_); // 设置敌人的目标为玩家
+    addChild(enemy_); // 将玩家对象添加到场景中
 }
 
 void SceneMain::handleEvents(SDL_Event &event)
