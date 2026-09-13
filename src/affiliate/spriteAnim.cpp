@@ -1,17 +1,14 @@
 #include "spriteAnim.h"
 
-SpriteAnim *SpriteAnim::addSpriteAnimComponent(ObjectScreen *parent, const std::string &file_path, float scale, bool bCentered, int fps)
+SpriteAnim *SpriteAnim::addSpriteAnimComponent(ObjectScreen *parent, const std::string &file_path, float scale, AnchorType anchor , int fps)
 {
     auto spriteAnim = new SpriteAnim();
     spriteAnim->init();
     spriteAnim->setParent(parent);
     parent->addChild(spriteAnim);
     spriteAnim->setTexture(Texture(file_path));
+    spriteAnim->normalizeOffsetToAnchor(anchor); // 根据锚点归一化偏移量
     spriteAnim->setScale(scale); // 缩小精灵
-    if (bCentered)
-    {
-        spriteAnim->setOffset(glm::vec2(-spriteAnim->getSize().x / 2.f, -spriteAnim->getSize().y / 2.f));
-    }
     spriteAnim->FPS = fps;
 
     return spriteAnim;

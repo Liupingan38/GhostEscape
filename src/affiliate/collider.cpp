@@ -8,13 +8,15 @@ void Collider::render()
 #endif //DEBUG_MODE
 }
 
-Collider *Collider::addColliderComponent(ObjectScreen *parent, glm::vec2 size, glm::vec2 offset, ColliderType type)
+Collider *Collider::addColliderComponent(ObjectScreen *parent, glm::vec2 size, float scale, ColliderType type,AnchorType anchor)
 {
     auto collider = new Collider();
     collider->init();
     collider->setParent(parent);
+
+    collider->normalizeOffsetToAnchor(anchor); // 根据锚点归一化偏移量
     collider->setSize(size);
-    collider->setOffset(offset);
+    collider->setScale(scale); // 缩放碰撞体
     collider->setColliderType(type);
     parent->addChild(collider);
     return collider;

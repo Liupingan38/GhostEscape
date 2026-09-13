@@ -14,7 +14,7 @@ private:
     
 public:
     static SpriteAnim* addSpriteAnimComponent(ObjectScreen* parent, const std::string& file_path, 
-        float scale=1.0f, bool bCentered = false,int fps = 10);
+        float scale=1.0f, AnchorType anchor = AnchorType::ANCHOR_CENTER,int fps = 10);
 
     void update(float dt);
     virtual void setTexture(Texture texture) override;

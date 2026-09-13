@@ -21,9 +21,8 @@ protected:
 
 public:
     static Sprite* addSpriteComponent(ObjectScreen* parent, const std::string& file_path, 
-        float scale = 1.0f, bool bCentered = false);
+        float scale = 1.0f, AnchorType anchor = AnchorType::ANCHOR_CENTER);
 
-    void setScale(float scale) { size_ *= scale; }
 
     // getter and setter
     Texture getTexture() const { return texture_; }

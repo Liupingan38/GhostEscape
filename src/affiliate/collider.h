@@ -15,8 +15,12 @@ private:
 public:
     virtual void render() override;
 
-    static Collider* addColliderComponent(ObjectScreen* parent, glm::vec2 size, 
-        glm::vec2 offset = glm::vec2(0.f, 0.f), ColliderType type = ColliderType::COLLIDER_CIRCLE);
+    static Collider* addColliderComponent(
+        ObjectScreen* parent, 
+        glm::vec2 size, 
+        float scale =  1.f ,
+        ColliderType type = ColliderType::COLLIDER_CIRCLE,
+        AnchorType anchor = AnchorType::ANCHOR_CENTER);
     
     bool checkCollision(const Collider& other) const;
 
