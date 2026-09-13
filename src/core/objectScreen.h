@@ -16,7 +16,7 @@ public:
     // getter and setter
     const glm::vec2& getScreenPosition() const { return screenPosition_; }
     virtual void setScreenPosition(const glm::vec2& pos) { screenPosition_ = pos; }
-
+    virtual const glm::vec2& getPosition() const { return glm::vec2(0.f, 0.f); }
 
 };
 

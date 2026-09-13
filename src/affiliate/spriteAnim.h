@@ -13,7 +13,7 @@ private:
     bool  is_loop_ = true; // 是否循环播放动画
     
 public:
-    static SpriteAnim* addSpriteAnimChild(ObjectScreen* parent, const std::string& file_path, 
+    static SpriteAnim* addSpriteAnimComponent(ObjectScreen* parent, const std::string& file_path, 
         float scale=1.0f, bool bCentered = false,int fps = 10);
 
     void update(float dt);

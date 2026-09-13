@@ -20,7 +20,7 @@ protected:
     bool is_finish_ = false; // 是否播放完毕（用于动画精灵）
 
 public:
-    static Sprite* addSpriteChild(ObjectScreen* parent, const std::string& file_path, 
+    static Sprite* addSpriteComponent(ObjectScreen* parent, const std::string& file_path, 
         float scale = 1.0f, bool bCentered = false);
 
     void setScale(float scale) { size_ *= scale; }

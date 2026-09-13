@@ -19,7 +19,6 @@ private:
     SpriteAnim *sprite_cur_ = nullptr; // 当前精灵动画
     EnemyState cur_state_ = EnemyState::MOVE;
 
-    float temp_timer_ = 0.f; // 临时计时器，用于状态切换
 
 public:
     Enemy() = default;
@@ -35,6 +34,7 @@ public:
     void checkState(); // 检查敌人状态
     void updateVelocityTowardsTarget(); // 更新敌人速度以追踪玩家
     void checkIsPendingKill(); // 被标记后，下一帧删除，下一帧就不会再调用update了
+    void TryAttackTarget(); // 攻击玩家
 
     // getter and setter
     Player* getTarget() const { return target_; }

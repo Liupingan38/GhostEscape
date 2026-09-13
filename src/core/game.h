@@ -24,7 +24,7 @@ private:
 
     // 游戏初始化相关
     bool isRunning_ = true;
-    glm::vec2 screenSize_ = glm::vec2(1080, 720);
+    glm::vec2 screenSize_ = glm::vec2(720, 640);
 
     // SDL相关
     SDL_Window *window_=nullptr;
@@ -60,6 +60,9 @@ public:
 
     // 渲染Texture
     void renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size);
+
+    // 渲染填充圆
+    void renderFilledCircle(const glm::vec2 &position, const glm::vec2 &size, float alpha = 1.0f);
     
     // 绘制网格
     void drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color);

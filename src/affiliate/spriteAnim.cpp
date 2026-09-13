@@ -1,6 +1,6 @@
 #include "spriteAnim.h"
 
-SpriteAnim *SpriteAnim::addSpriteAnimChild(ObjectScreen *parent, const std::string &file_path, float scale, bool bCentered, int fps)
+SpriteAnim *SpriteAnim::addSpriteAnimComponent(ObjectScreen *parent, const std::string &file_path, float scale, bool bCentered, int fps)
 {
     auto spriteAnim = new SpriteAnim();
     spriteAnim->init();

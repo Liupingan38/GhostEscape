@@ -5,9 +5,13 @@
 void Player::init()
 {
     Actor::init(); // 调用父类的初始化方法
-    sprite_idle_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.5f, true);
-    sprite_move_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-move.png", 2.5f, true);
+    sprite_idle_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghost-idle.png", 2.5f, true);
+    sprite_move_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghost-move.png", 2.5f, true);
     sprite_move_->setActive(false); 
+
+    //设置碰撞体
+    collider_ = Collider::addColliderComponent(this, sprite_move_->getSize(), sprite_move_->getOffset());
+    
 }
 
 void Player::handleEvents(SDL_Event &event)

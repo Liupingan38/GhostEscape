@@ -39,6 +39,7 @@ add_executable(${TARGET}
                         src/core/objectWorld.cpp
                         src/core/assetStore.cpp
                         src/core/objectAffiliate.cpp
+                        src/affiliate/collider.cpp
                         src/affiliate/sprite.cpp
                         src/affiliate/spriteAnim.cpp
                         )

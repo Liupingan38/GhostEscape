@@ -190,6 +190,14 @@ void Game::renderTexture(const Texture &texture, const glm::vec2 &position, cons
     SDL_RenderTextureRotated(renderer_, texture.texture, &texture.src_rect, &dest_rect, texture.angle, nullptr, texture.is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
+void Game::renderFilledCircle(const glm::vec2 &position, const glm::vec2 &size, float alpha)
+{
+    SDL_Texture *circle_texture = assetStore_->getTexture("assets/UI/circle.png"); // 确保圆形纹理已加载
+    SDL_FRect dest_rect = {position.x, position.y, size.x, size.y};
+    SDL_SetTextureAlphaModFloat(circle_texture, alpha); // 设置透明度
+    SDL_RenderTexture(renderer_, circle_texture, nullptr, &dest_rect);
+}
+
 void Game::drawGrid(const glm::vec2& left_top, const glm::vec2& right_bottom, float gridWidth, SDL_FColor color)
 {
     SDL_SetRenderDrawColorFloat(renderer_, color.r, color.g, color.b, color.a);
