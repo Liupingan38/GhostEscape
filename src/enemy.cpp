@@ -6,18 +6,18 @@ void Enemy::init()
 {
     Actor::init(); 
 
-    sprite_move_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghost-Sheet.png", 2.5f, true);
+    sprite_move_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghost-Sheet.png", 2.5f);
     sprite_move_->setActive(true);
     
-    sprite_hurt_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghostHurt-Sheet.png", 2.5f, true);
+    sprite_hurt_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghostHurt-Sheet.png", 2.5f);
     sprite_hurt_->setActive(false);
 
-    sprite_dead_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghostDead-Sheet.png", 2.5f, true);
+    sprite_dead_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghostDead-Sheet.png", 2.5f);
     sprite_dead_->setActive(false);
     sprite_dead_->setLoop(false); // 死亡动画不循环播放
 
     //设置碰撞体
-    collider_ = Collider::addColliderComponent(this, sprite_move_->getSize(),sprite_move_->getOffset());
+    collider_ = Collider::addColliderComponent(this, sprite_move_->getSize());
 
     sprite_cur_ = sprite_move_;
     
