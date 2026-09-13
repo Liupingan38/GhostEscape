@@ -1,6 +1,7 @@
 #include "player.h"
 #include "core/scene.h"
 #include "affiliate/spriteAnim.h"
+#include "raw/stats.h"
 
 void Player::init()
 {
@@ -11,7 +12,8 @@ void Player::init()
 
     //设置碰撞体
     collider_ = Collider::addColliderComponent(this, sprite_move_->getSize(), 0.8f);
-    
+
+    stats_ = Stats::addStatsComponent(this);
 }
 
 void Player::handleEvents(SDL_Event &event)

@@ -3,11 +3,15 @@
 #include "objectWorld.h"
 #include<AccCtrl.h>
 
+class Stats;
+
 class Actor : public ObjectWorld
 {   
 protected:
     glm::vec2 velocity_ = glm::vec2(0.f, 0.f);
     float maxSpeed_ = 500.f; // 每秒最大移动速度
+
+    Stats* stats_ = nullptr; // 角色属性组件指针
 public:
     Actor() = default;
     virtual ~Actor() = default;
@@ -19,5 +23,7 @@ public:
     void setVelocity(const glm::vec2& vel) { velocity_ = vel; }
     float getMaxSpeed() const { return maxSpeed_; }
     void setMaxSpeed(float speed) { maxSpeed_ = speed; }
+    Stats* getStats() const { return stats_; }
+    void setStats(Stats* stats) { stats_ = stats; }
 
 };

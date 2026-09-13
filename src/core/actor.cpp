@@ -1,5 +1,6 @@
 #include "actor.h"
 #include "scene.h"
+#include "../raw/stats.h"
 
 void Actor::move(float dt)
 {

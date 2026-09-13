@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include "core/scene.h"
 #include "affiliate/collider.h"
+#include "raw/stats.h"
 
 void Enemy::init()
 {
@@ -16,10 +17,12 @@ void Enemy::init()
     sprite_dead_->setActive(false);
     sprite_dead_->setLoop(false); // 死亡动画不循环播放
 
+    sprite_cur_ = sprite_move_;
+
     //设置碰撞体
     collider_ = Collider::addColliderComponent(this, sprite_move_->getSize());
 
-    sprite_cur_ = sprite_move_;
+    stats_ = Stats::addStatsComponent(this);
     
 }
 
@@ -87,6 +90,8 @@ void Enemy::TryAttackTarget()
     {
         // 如果发生碰撞，执行攻击逻辑
         // 这里可以添加攻击玩家的代码，例如减少玩家的生命值等
-        printf("Enemy attacks the player!");
+        if(stats_ && target_->getStats()){
+            target_->getStats()->takeDamage(stats_->getAttack());
+        }
     }
 }

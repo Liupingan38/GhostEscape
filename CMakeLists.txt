@@ -42,6 +42,7 @@ add_executable(${TARGET}
                         src/affiliate/collider.cpp
                         src/affiliate/sprite.cpp
                         src/affiliate/spriteAnim.cpp
+                        src/raw/stats.cpp
                         )
 
 # 链接库
