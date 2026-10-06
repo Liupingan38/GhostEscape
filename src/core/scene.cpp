@@ -24,6 +24,7 @@ void Scene::update(float dt)
         if(child->isPendingKill()){
             child->clean();
             delete child;
+            child = nullptr;
             it = worldChildren_.erase(it);
         }else{
             if (child->isActive()) child->update(dt);
@@ -36,6 +37,7 @@ void Scene::update(float dt)
         if(child->isPendingKill()){
             child->clean();
             delete child;
+            child = nullptr;
             it = screenChildren_.erase(it);
         }else{
             if (child->isActive()) child->update(dt);
@@ -66,12 +68,14 @@ void Scene::clean()
     {
         child->clean();
         delete child;
+        child = nullptr;
     }
     screenChildren_.clear();
     for (auto child : worldChildren_)
     {
         child->clean();
         delete child;
+        child = nullptr;
     }
     worldChildren_.clear();
 }

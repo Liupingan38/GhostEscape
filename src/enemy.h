@@ -24,6 +24,8 @@ public:
     Enemy() = default;
     virtual ~Enemy() = default;
 
+    static Enemy* addEnemyChild(Object* parent, Player* target, const glm::vec2& position);
+
     virtual void init() override;
     //virtual void handleEvents(SDL_Event &event) override;
     virtual void update(float dt) override;

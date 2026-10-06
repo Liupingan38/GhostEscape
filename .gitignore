@@ -81,3 +81,6 @@ Makefile
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+
+# 本地 Markdown 文档
+/MD/

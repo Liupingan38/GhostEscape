@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/scene.h"
+#include "spawner.h"
 
 class Player;
 
@@ -32,5 +33,8 @@ private:
 
     //玩家
     Player* player_ = nullptr;
+
+    //敌人生成器
+    Spawner* spawner_ = nullptr;
 };
 

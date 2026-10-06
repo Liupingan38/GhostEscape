@@ -13,7 +13,12 @@ void Player::init()
     //设置碰撞体
     collider_ = Collider::addColliderComponent(this, sprite_move_->getSize(), 0.8f);
 
+    //设置属性
     stats_ = Stats::addStatsComponent(this);
+
+    //设置死亡特效
+    death_effect_ = Effect::addEffectChild(nullptr,"assets/effect/1764.png",nullptr,glm::vec2(0.f, 0.f));
+
 }
 
 void Player::handleEvents(SDL_Event &event)
@@ -27,6 +32,7 @@ void Player::update(float dt)
 
     keyboardControl();
     checkState();
+    checkIsAlive();
     move(dt);
     followCamera();
 }
@@ -99,5 +105,15 @@ void Player::changeState(bool isMoving)
         sprite_move_->setActive(false);
         sprite_idle_->setCurFrame(sprite_move_->getCurFrame());
         sprite_idle_->setTimeCounter(sprite_move_->getTimeCounter());
+    }
+}
+
+void Player::checkIsAlive()
+{
+    if(!stats_->getIsAlive()){
+        game_.getCurrentScene()->addChildSafe(death_effect_);
+        death_effect_->setPosition(getPosition());
+        setActive(false);
+        
     }
 }

@@ -3,9 +3,20 @@
 #include "affiliate/collider.h"
 #include "raw/stats.h"
 
+Enemy *Enemy::addEnemyChild(Object *parent, Player *target, const glm::vec2 &position)
+{
+    Enemy* enemy = new Enemy();
+    enemy->init();
+    enemy->setPosition(position);
+    enemy->setTarget(target); // 设置敌人的目标为玩家
+    if(parent) parent->addChildSafe(enemy);
+    return enemy;
+}
+
 void Enemy::init()
 {
     Actor::init(); 
+    setMaxSpeed(150.f);
 
     sprite_move_ = SpriteAnim::addSpriteAnimComponent(this, "assets/sprite/ghost-Sheet.png", 2.5f);
     sprite_move_->setActive(true);
@@ -29,12 +40,15 @@ void Enemy::init()
 void Enemy::update(float dt)
 {
     Actor::update(dt); // 调用父类的更新方法
-
-    updateVelocityTowardsTarget(); // 更新敌人速度以追踪玩家
-    move(dt); // 根据速度移动敌人
-    checkState(); // 检查敌人状态
-    TryAttackTarget(); // 检查是否攻击玩家
-    checkIsPendingKill();
+    
+    if(target_->isActive()){
+        updateVelocityTowardsTarget(); // 更新敌人速度以追踪玩家
+        move(dt); // 根据速度移动敌人
+        checkState(); // 检查敌人状态
+        TryAttackTarget(); // 检查是否攻击玩家
+        checkIsPendingKill();
+    }
+    
 }
 
 void Enemy::changeState(EnemyState newState)
@@ -66,11 +80,19 @@ void Enemy::checkState()
 
 void Enemy::updateVelocityTowardsTarget()
 {
-    if (!target_) return; // 如果没有目标玩家，直接返回
+    if (!target_) {
+        setVelocity(glm::vec2(0.f));
+        return;
+    }
 
-    glm::vec2 direction = target_->getPosition() - getPosition(); // 计算敌人到玩家的方向向量
-    setVelocity(glm::normalize(direction) * getMaxSpeed()); // 设置敌人的速度为最大速度，方向指向玩家
+    glm::vec2 direction = target_->getPosition() - getPosition();
+    float distanceSquared = glm::dot(direction, direction);
+    if (distanceSquared <= 0.0001f) {
+        setVelocity(glm::vec2(0.f));
+        return;
+    }
 
+    setVelocity(glm::normalize(direction) * getMaxSpeed());
 }
 
 void Enemy::checkIsPendingKill()

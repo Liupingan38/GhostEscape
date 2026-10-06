@@ -32,6 +32,7 @@ add_executable(${TARGET}
                         src/sceneMain.cpp
                         src/player.cpp
                         src/enemy.cpp
+                        src/spawner.cpp
                         src/core/game.cpp
                         src/core/scene.cpp
                         src/core/actor.cpp
@@ -43,6 +44,7 @@ add_executable(${TARGET}
                         src/affiliate/sprite.cpp
                         src/affiliate/spriteAnim.cpp
                         src/raw/stats.cpp
+                        src/world/effect.cpp
                         )
 
 # 链接库
